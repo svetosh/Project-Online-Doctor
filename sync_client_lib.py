@@ -1,12 +1,7 @@
 import  ftplib
 
 class BinaryBuffer:
-	####################################################################
-	#
 	# internal class
-	# внутренний класс
-	#
-	####################################################################
 	BinaryData=bytes()
 	
 	def Write(self,BinaryData):
@@ -18,17 +13,13 @@ class BinaryBuffer:
 		savefile.close()
 
 class FTPConnection:
-	####################################################################
-	#
-	# Класс для работы с ftplib (стандартный модуль)
-	#
-	####################################################################
+	
 	Server=''
 	Login=''
 	Password=''
 	Connection=""
-	BinBuf=BinaryBuffer()
-	
+	BinBuf=[] # BinaryBuffer()
+	# Функции для:
 	def __init__(self,Login='',Password='',Server='localhost'): 
 		# Инициализации класса 
 		self.Login = Login
@@ -36,7 +27,7 @@ class FTPConnection:
 		self.Server = Server # сервер по умолчанию - localhost
 		
 	def Connect(self):
-		# открытие соединения (подключение к серверу)
+		# Открытия соединения (подключение к серверу)
 		try: 
 			try: # тут попытка обойти возможные ошибки при подключении
 				self.Connection=ftplib.FTP(self.Server,self.Login,self.Password)
@@ -48,18 +39,33 @@ class FTPConnection:
 			print("Can't connect, check server data.")
 			
 	def Disconnect(self): 
-		# закрытие соединения (отключение от сервера)
+		# Закрытие соединения (отключение от сервера)
 		self.Connection.quit() 
 		print("Disconnected.")
 		
 	def ListDir(self):
-		# вывод содержимого директории 
+		# Показать директорию 
 		return self.Connection.retrlines('LIST')
 		
 	def ChangeDir(self,WantedDir):
-		# Смена директории директорию
+		# Сменить директорию
 		self.Connection.cwd(WantedDir)
 		
-	def GetFile(self, FileName):
+	def GetFile(self, FileName, SaveToggle=True): 
 		# Получение файла
-		self.Connection.retrbinary('RETR '+FileName, self.BinBuf.Write)
+		# если SaveToggle = False, то функция просто возвращает байты
+		BinBufObj = BinaryBuffer()
+		self.Connection.retrbinary('RETR '+FileName, BinBufObj.Write)
+		
+		if SaveToggle == True:
+			BinBufObj.SaveToFile(FileName)
+			return BinBufObj
+		else:
+			return BinBufObj
+	
+	def GetMultiple(self, FileNameList, SaveToggle=True):
+		# получение нескольких файлов
+		for FileName in FileNameList:
+			BinBufObj = self.GetFile(FileName,SaveToggle)
+			if SaveToggle == False: # Если ложь,
+				self.BinBuf.append(BinBufObj) # то кешируем файл в ОЗУ
