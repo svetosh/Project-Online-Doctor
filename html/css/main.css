@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Raleway&display=swap');
+
+.header {
+    width: 100%;
+    background-image: url(../img/sha.jpg);
+    min-height: 350px;
+    background-size: cover;
+    background-position: center;
+
+}
+
+li {
+    display: inline-block;
+    margin-right: 40px;
+}
+
+li a {
+    color: #fff;
+    font-family: Lato;
+    text-transform: uppercase;
+
+}
+
+li a:hover {
+    color: white;
+
+}
+
+.menu {
+    position: relative;
+    top: 70px;
+
+}
+
+.logo {
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+
+.img-fluid {
+    min-width: 200px;
+    min-height: 100px;
+
+}
+
+.block {
+    margin-top: 110px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+h1,h2,h3,h4 {
+    font-family: Raleway;
+    font-size: 48px
+
+}
+
+
+
+.btn-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 35px;
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+      font-size: 22px;
+      white-space: normal;
+  }
+
+.btn-rounded {
+      border-radius: 38px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      padding-left: 8px;
+
+  }
+.text {
+      font-family: Raleway;
+      color: #808080;
+}
+
+.row {
+      padding-bottom: 150px;
+
+}
+
+.modal-content{}
+
+
+
+}
+
+.modal-dialog {
+margin-left: 50px;
+margin-right: 250px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+form{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 15px 25px;
+}
+
+
+
+.circle {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 10em;
+height: 5em;
+box-sizing: border-box;
+margin-bottom: 10px;
+
+
+}
+
+label{
+width: 100%;
+height: 100%;
+color: white;
+font-size: 10px;
+background: #6899D7;
+cursor: pointer;
+border-radius: 4px;
+-ms-user-select: none;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+}
+
+#sec2{
+width: 50%;
+margin: 0 auto;
+}
+
+label:hover {
+background: #1C5297;
+
+}
+
+
+input[type="checkbox"]:checked + label{
+  background: black!important;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.otpr{
+margin: 0 auto;
+display: block;
+box-sizing: border-box;
+height: 50px;
+font-size: 18px;
+padding: 5px 15px;
+background: gray;
+border-radius: 20px;
+
+}
+
+.title{
+
+font-family: Raleway;
+text-align: center;
+padding: 2px 0px;
+border-bottom: 1px solid white;
+}
+
+.content{
+
+  font-family: lato;
+  padding: 0 5px;
+}
+
+#bodyZoneBlocks{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 25em;
+  margin: 0 auto;
+  opacity: 1;
+}
+
+.bodyZone-field {
+  height: 5em;
+}
+
+.bodyZone-block,
+.bodyPart-block{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: white;
+  border: 1px solid white;
+}
+
+.bodyZone-input:checked + .bodyZone-block,
+.bodyPart-input:checked + .bodyPart-block {
+  background-color: gray;
+}
+
+
+.hidden {
+  display: none;
+}

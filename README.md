@@ -33,5 +33,6 @@
 `apt install swi-prolog-full apache2`
 
 
+
 ## Установка в Windows
 ### --W.I.P.--
