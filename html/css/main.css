@@ -56,8 +56,28 @@ padding: 10px 20px;
 }
 
 .startbtn{
+color: white;
 margin: 14px 15px;
 display: inline-block;
+background: #de66b6;
+
+}
+
+.fa-play{
+  color: #de66b6;
+  transition: all 0.5s cubic-bezier(0,.45,.42,1);
+}
+
+.startbtn:hover{
+background: #a34f87;
+color: #a34f87;
+
+}
+
+.startbtn:hover .fa-play{
+color: #a34f87;
+transform: translateX(50px);
+
 
 }
 
@@ -130,9 +150,10 @@ align-items: center;
 form{
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  flex-wrap: wrap;
+  align-content: stretch;
+  flex-flow: row wrap;
   box-sizing: border-box;
   padding: 15px 25px;
 
@@ -145,21 +166,23 @@ display: flex;
 justify-content: center;
 align-items: center;
 width: 10em;
-height: 5em;
+min-height: 5em;
 box-sizing: border-box;
 margin-bottom: 10px;
+white-space: pre-wrap;
+word-break: break-word;
 
 
 }
 
 label{
-display: flex;
-align-items: center;
+display: block;
 width: 100%;
 height: 100%;
+min-height: 5em;
 color: white;
 font-size: 14px;
-background: #d987d1;
+background: #696969;
 cursor: pointer;
 border-radius: 4px;
 -ms-user-select: none;
@@ -167,9 +190,8 @@ border-radius: 4px;
       -khtml-user-select: none;
       -webkit-user-select: none;
 box-sizing: border-box;
-padding: 0 20px;
+padding: 5px 20px;
 font-family: Raleway;
-word-wrap: break-word;
 text-align: center;
 
 }
@@ -180,68 +202,19 @@ margin: 0 auto;
 }
 
 label:hover {
-background: #a5689e;
+background: #4e4e4e;
 
 }
 
 
 input[type="checkbox"]:checked + label{
-  background: #a5689e!important;
+  background: #4e4e4e!important;
 }
 
 input[type="checkbox"] {
   display: none;
 }
-.otpr {
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
-0s;
-}
-.otpr:hover {
-    color: #000 !important;
-    background-color: transparent;
-    text-shadow: none;
-}
-.otpr:hover:before {
-    left: 0%;
-    right: auto;
-    width: 100%;
-}
-.otpr:before {
-    display: block;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    height: 100%;
-    width: 0px;
-    z-index: -1;
-    content: '';
-    color: #000 !important;
-    background: #F7CA18;
-    border-radius: 5px;
-    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
-0s;
-}
-.otpr{
-  margin: 0 auto;
-  display: block;
-  box-sizing: border-box;
-  color: white;
-  height: 50px;
-  width: 150px;
-  font-size: 18px;
-  padding: 5px 15px;
-  background: #d987d1;
-  border-radius: 5px;
-  border: 0;
-  z-index: 0;
-}
-.otpr:active, .otpr:hover{
-border-width: 0px !important;
-}
+
 
 .doctors {
   display: flex;
@@ -257,12 +230,15 @@ width: 100%;
 margin-bottom: 5px;
 border: 1px solid black;
 
-
-
 }
+
+
+
 .doctors.circle:last-child{
   margin-bottom: 0;
 }
+
+
 
 #bodyZoneBlocks{
   display: grid;
@@ -272,9 +248,13 @@ border: 1px solid black;
   opacity: 1;
 }
 
+
+
 .bodyZone-field {
   height: 5em;
 }
+
+
 
 .bodyZone-block,
 .bodyPart-block{
@@ -289,9 +269,13 @@ border: 1px solid black;
   color: white;
   border: 1px solid white;
 }
+
+
 .bodyZone-block:hover{
-  background: #a5689e !important;
+  background: #4e4e4e !important;
 }
+
+
 
 .bodyZone-input:checked + .bodyZone-block,
 .bodyPart-input:checked + .bodyPart-block {
@@ -306,6 +290,8 @@ border: 1px solid black;
 .startanime{
 animation: start 0.5s cubic-bezier(0.1, -0.6, 0.2, 0) forwards;
 }
+
+
 @keyframes start {
   0%{
     top: -5px;
@@ -318,4 +304,71 @@ animation: start 0.5s cubic-bezier(0.1, -0.6, 0.2, 0) forwards;
   }
 }
 
+.otprbtn{
+margin: 0 auto;
+display: block;
+position: relative;
+box-sizing: border-box;
+height: 50px;
+width: 150px;
+font-size: 18px;
+padding: 5px 15px;
+background: #31aac6;
+border-radius: 5px;
+border: 0;
+box-shadow: 1px 2px 1px 1px #696969;
+    z-index: 1;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+}
 
+
+.otprbtn:hover {
+    color: #000 !important;
+    background-color: transparent;
+    text-shadow: nthree;
+}
+
+
+.otprbtn:before {
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 0px;
+    border-radius: 5px;
+    z-index: -1;
+    content: '';
+    color: #000;
+    background: #F7CA18;
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+
+}
+.otprbtn:hover:before {
+    left: 0%;
+    right: auto;
+    width: 100%;
+}
+.btn-circle:hover .fa-align-center,.btn-circle:hover .fa-suitcase{
+animation: rolling 1.5s linear 0s infinite;
+
+}
+@keyframes rolling {
+  0%{
+    transform: rotate(0deg);
+  }
+  25%{
+transform: rotate(15deg);
+  }
+  50%{
+    transform: rotate(0deg);
+  }
+  75%{
+    transform: rotate(-15deg);
+  }
+  100%{
+    transform: rotate(0deg);
+  }
+}
