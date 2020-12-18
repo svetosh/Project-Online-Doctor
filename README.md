@@ -1,6 +1,6 @@
 # T3P1
 #### Описание
-Сервер и база знаний на языке SWI-Prolog для экспертной системы
+Сервер и база знаний на языке SWI-Prolog для экспертной системы.
 
 #### Процедуры
 * сервстарт(Порт). - запуск сервера;
@@ -18,21 +18,28 @@
 |   kbase_doctors.pl |  База знаний "класс заболевания -> специалист"|
 |   kbase_handler.pl |  Прослойка для работы с БЗ                    |
 |   README.md        |  Файл с описанием                             |
+|   html             |  Готовые HTML страницы сайта (и CSS стили).   |
 
 ## Зависимости
-1. Интерпретатор SWI-Prolog
-2. Модули `http/http_server, http/http_json, http/json_convert и lists`
-
+1. Интерпретатор SWI-Prolog;
+2. Модули `http/http_server, http/http_json, http/json_convert и lists`;
+3. Web-сервер.
 
 ## Установка в Linux
 
-**Debian + Apache HTTP Server:**
+**Debian**
 
-Установите зависимости, выполнив:
+Установите swi-prolog с его библиотеками, выполнив:
 
-`apt install swi-prolog-full apache2`
+`apt install swi-prolog-full`
 
+Запустите сервер на прологе, открыв rest_srv.pl в интерпретаторе `swipl`:
 
+`сервстарт(ПОРТ).`
+
+Настройте proxy и reverse-proxy на своём сервере для адресов `http:localhost:ПОРТ/answer` и `http:localhost:ПОРТ/symptoms_list`.
+
+После этого API сервера будет доступен по адресам настроенным в proxy.
 
 ## Установка в Windows
 ### --W.I.P.--
