@@ -126,7 +126,7 @@
     <script type="text/javascript">
 
   document.getElementById('otpr1').addEventListener('click', (event) => {
-     request("http://mira.shadow.chancellery/plsrv/symptoms_list").then(data => {
+     request("http://URL TO/plsrv/symptoms_list").then(data => {
      sqr(data)
      })
 
@@ -143,7 +143,7 @@
   document.getElementById('otpr2').addEventListener('click', (event) => {
       const values =  Array.from(document.querySelectorAll('.symptom:checked')).map(el => el.value)
       console.log(values)
-      request("http://mira.shadow.chancellery/plsrv/answer","POST",values).then(data => {
+      request("http://URL TO/plsrv/answer","POST",values).then(data => {
       sqr1(data)
         })
 
