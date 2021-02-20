@@ -151,7 +151,6 @@ form{
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   align-content: stretch;
   flex-flow: row wrap;
   box-sizing: border-box;
@@ -182,7 +181,7 @@ height: 100%;
 min-height: 5em;
 color: white;
 font-size: 14px;
-background: #696969;
+background: #2244af;
 cursor: pointer;
 border-radius: 4px;
 -ms-user-select: none;
@@ -202,8 +201,8 @@ margin: 0 auto;
 }
 
 label:hover {
-background: #4e4e4e;
-
+background: #F7CA18;
+color:black;
 }
 
 

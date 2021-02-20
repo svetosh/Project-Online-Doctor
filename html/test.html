@@ -71,7 +71,7 @@
                         </div>`).join('\n')
                       </script>
                   </form>
-  <button class="otprbtn" id="otpr1" type="button">поменять</button>
+  <button class="otprbtn" id="otpr1" type="button">Продолжить</button>
 </section>
 <section id="sec2" class="hidden block">
   <form class="" action="" id="form1" method="post">
@@ -86,7 +86,7 @@
      }
      </script>
   </form>
-  <button class="otprbtn" id="otpr2" type="button">отправить</button>
+  <button class="otprbtn" id="otpr2" type="button">Отправить</button>
 </section>
 <section id="sec3" class="hidden block">
 <div id="doctorslist">
@@ -126,7 +126,7 @@
     <script type="text/javascript">
 
   document.getElementById('otpr1').addEventListener('click', (event) => {
-     request("URL TO /symptoms_list").then(data => {
+     request("http://URL TO/plsrv/symptoms_list").then(data => {
      sqr(data)
      })
 
@@ -143,7 +143,7 @@
   document.getElementById('otpr2').addEventListener('click', (event) => {
       const values =  Array.from(document.querySelectorAll('.symptom:checked')).map(el => el.value)
       console.log(values)
-      request("URL TO /answer","POST",values).then(data => {
+      request("http://URL TO/plsrv/answer","POST",values).then(data => {
       sqr1(data)
         })
 
