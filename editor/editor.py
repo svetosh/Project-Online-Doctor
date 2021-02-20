@@ -1,11 +1,11 @@
 #!/bin/python3
 ##############
-#	"kantoku" in Japanese means supervisor, manager, director and etc.
-#	
+#	Codename: Kantoku
+#
 #	This program manages the database for the project Online Doctor
 #
 import tkinter as tk
-from . import libodpdb as mdb
+from . import libeditor as db
 
 class Kantoku():
 	main_window = tk.Tk()
