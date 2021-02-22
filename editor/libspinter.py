@@ -1,5 +1,7 @@
 ################################################################################
 #
+#	An interface library.
+#
 #	Codename:		Kankei (Connection)
 # 	Version: 		0.1
 # 	Description:	SWI-Prolog interface
