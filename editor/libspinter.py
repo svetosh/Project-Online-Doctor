@@ -1,3 +1,6 @@
+# SWI-Prolog interface
+# Version: 0.1
+
 class PTermIO():
 	variables = []
 	def __init__(self, string = ''):
