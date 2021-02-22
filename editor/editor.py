@@ -1,4 +1,5 @@
 ################################################################################
+#
 #	An offline editor for the database.
 #
 #	Codename:		Kantoku
@@ -12,6 +13,7 @@
 ################################################################################
 
 import tkinter as tk
+
 from . import libeditor as db
 
 class Kantoku():

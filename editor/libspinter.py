@@ -1,16 +1,26 @@
-# SWI-Prolog interface
-# Version: 0.1
+################################################################################
+#
+#	Codename:		Kankei (Connection)
+# 	Version: 		0.1
+# 	Description:	SWI-Prolog interface
+#
+################################################################################
+
 
 class PTermIO():
 	variables = []
+	
 	def __init__(self, string = ''):
-		self.variables = string.split(',')
+		self.variables = string.split(', ') # Terms do not contain spaces in ""!
 		
+
 class Term():
+	
 	logic_op_0 = '' 
 	predicate = ''
 	pinput = ''
 	logic_op_1 = ''
+	
 	def __init__(self, string = ''):
 		if string != '':
 			closing_p = string.find(')')
