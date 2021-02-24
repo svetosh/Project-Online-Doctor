@@ -35,7 +35,8 @@ class Term():
 			self.logic_op_0 = string[:i]
 			self.logic_op_1 = string[closing_p + 1:]
 			print (self.logic_op_0, self.predicate, self.pinput.variables, self.logic_op_1)
-			
+	def  write(self, ofile):
+		todo = True
 
 class ComplexTerm():
 	first_line = ''
