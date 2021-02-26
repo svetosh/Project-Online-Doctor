@@ -1,16 +1,15 @@
-:- module(kbase_handler, [назначить/2, список_симптомов/1]).
+:- module(kbase_handler, [find_doctor/2]).
 
 :- consult(kbase_doctors).
 
-удалить_дубликат([], []):-!.
-удалить_дубликат([X|Xs], Ys):-
+
+delete_doubles([], []):-!.
+delete_doubles([X|Xs], Ys):-
       member(X, Xs),
-      !, удалить_дубликат(Xs, Ys).
-удалить_дубликат([X|Xs], [X|Ys]):-
-%     \+ member(X, Xs),
-      !, удалить_дубликат(Xs, Ys).
-
-
-назначить(Симптомы,СписокВрачей):-
-    findall(Врачи, назначить_raw(Симптомы,Врачи), СписокВрачей_raw),
-    удалить_дубликат(СписокВрачей_raw, СписокВрачей).
+      !, delete_doubles(Xs, Ys).
+delete_doubles([X|Xs], [X|Ys]):-
+      !, delete_doubles(Xs, Ys).
+      
+find_doctor(Symptoms,Doctors):-
+    findall(Doctor, doctor(Symptoms, Doctor), Doctors_raw),
+    delete_doubles(Doctors_raw, Doctors).
