@@ -15,10 +15,16 @@ from . import libspinter as spinter # SWI-Prolog interface
 
 class PrologFile():
 	filename = ''
+	header = []  # a list of facts not visible for a user
 	rules = []
 	
 	def read(self):
 		ifile = open (filename + '.pl')
+		
+		header_len = ifile.readline().strip()[1:]
+		for i in range(header_len):
+			header.append(Fact(ifile.readline().strip()))  # reading header
+			
 		line = ifile.readline().strip()
 		buffer_rule = Rule()
 		while line!='':
@@ -26,16 +32,21 @@ class PrologFile():
 			if buffer_fact.log_op_end == '-:':
 				buffer_rule.first_line = buffer_fact
 			else:
-				buffer_rule.conditions.append(buffer_fact)
+				buffer_rule.conditions.append(buffer_fact)  # reading rules
 				if buffer_fact.log_op_end == '.':
 					rules.append(buffer_rule)
 					buffer_rule.clear()
 			line = ifile.readline().strip()
+		
 		ifile.close()
 		
 	def write(self):
-		ofile = open (filename + 'test.pl')
-		
+		ofile = open (filename + 'test.pl','w')
+		ofile.write('%'+len(self.header))
+		for i in header:
+			i.write(ofile)
+		for i in rules:
+			i.write(ofile)
 		ofile.close()
 
 class PrologDatabase():
