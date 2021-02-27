@@ -7,44 +7,46 @@
 # 	Description:	SWI-Prolog interface
 #
 ################################################################################
-
-
-class PTermIO():
-	variables = []
-	def __init__(self, string = ''):
-		self.variables = string.split(', ') # Terms do not contain spaces in ""!
-
-class Term():
-	
-	logic_op_0 = '' 
+class Fact():
+	logic_op_begin = '' 
 	predicate = ''
-	pinput = ''
-	logic_op_1 = ''
+	parameters = []
+	logic_op_end = ''
 	
 	def __init__(self, string = ''):
 		if string != '':
+			self.read(string)
+
+	def write(self, ofile):
+		todo = True
+		
+	def read(self, string):
+		if string != '':
 			closing_p = string.find(')')
 			opening_p = string.rfind('(')
-			self.pinput = PTermIO(string[opening_p + 1:closing_p])
+			self.parameters = string[opening_p + 1:closing_p].split(', ')
 			i = 0
 			while not(string[i].isalpha()):
 				i+=1 
 			self.predicate = string[i:opening_p]
-			self.logic_op_0 = string[:i]
-			self.logic_op_1 = string[closing_p + 1:]
-			print (self.logic_op_0, self.predicate, self.pinput.variables, self.logic_op_1)
-			
-	def  write(self, ofile):
-		todo = True
+			self.logic_op_begin = string[:i]
+			self.logic_op_end = string[closing_p + 1:]
+			print (self.logic_op_begin, self.predicate, self.parameters, self.logic_op_end)
 
-class ComplexTerm():
+class Rule():
 	first_line = ''
 	conditions = []
 	
-	def __init__(self, first_line_term, conditions = []):
-		self.first_line = Term(first_line_term)
+	def __init__(self, first_line, conditions = []):
+		self.first_line = Fact(first_line)
 		for i in conditions:
-			self.conditions.append(Term(i))
-	def write(self):
+			self.conditions.append(Fact(i))
+	def write(self, ofile):
 		todo = True
-		
+	def read(self, ifile):
+		todo = True
+	def clear(self):
+		first_line = ''
+		conditions = []
+
+

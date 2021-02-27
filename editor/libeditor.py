@@ -13,17 +13,38 @@
 
 from . import libspinter as spinter # SWI-Prolog interface
 
-class PrologDatabase():
-	database_name = 'Database'
-	symp_lists = dict()		# a dictionary of Term-s
-	symp2dis_terms = []
-	dis2doct_terms = []
-
-	def write_db(self):
-		ofile = open (database_name+'.slc.pl')
+class PrologFile():
+	filename = ''
+	rules = []
+	
+	def read(self):
+		ifile = open (filename + '.pl')
+		line = ifile.readline().strip()
+		buffer_rule = Rule()
+		while line!='':
+			buffer_fact = Fact(line)
+			if buffer_fact.log_op_end == '-:':
+				buffer_rule.first_line = buffer_fact
+			else:
+				buffer_rule.conditions.append(buffer_fact)
+				if buffer_fact.log_op_end == '.':
+					rules.append(buffer_rule)
+					buffer_rule.clear()
+			line = ifile.readline().strip()
+		ifile.close()
+		
+	def write(self):
+		ofile = open (filename + 'test.pl')
 		
 		ofile.close()
 
+class PrologDatabase():
+	symp_lists = SymBase()
+	dis_classes = DisBase()
+	doc_register = DocBase()
+
+	def write_db(self):
+		todo = True
 	def read_db(self):
 		todo = True
 #####################################
