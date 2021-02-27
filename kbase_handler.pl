@@ -1,6 +1,6 @@
 :- module(kbase_handler, [find_doctor/2]).
 
-:- consult(kbase_doctors).
+:- use_module(kbase_doctors).
 
 
 delete_doubles([], []):-!.

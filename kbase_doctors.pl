@@ -1,5 +1,4 @@
 :- module(kbase_doctors, [doctor/2]).
-
 :- consult(kbase_deseases).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

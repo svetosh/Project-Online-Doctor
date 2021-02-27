@@ -1,4 +1,4 @@
-:- use_module(internal_func). % ache/3
+:- use_module(ache_term). % ache/3
 
 % База знаний "класс заболевания - симптомы"
 
