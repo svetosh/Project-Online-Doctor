@@ -10,7 +10,7 @@
 INDENT = '    '
 ENDL = '\n'
 
-class PParameters():  # parameters with autoparsing
+class PParameters():  # parameters with autoparsing ##TODO
 	raw_sring = ''
 	plist = []
 	def __init__(self, string = ''):
@@ -22,6 +22,9 @@ class PParameters():  # parameters with autoparsing
 		else:
 			raw_sring = ''
 			tdict = dict()
+	def write(self, ofile):
+		todo = True
+	
 
 class Fact():
 	logic_op_begin = '' 

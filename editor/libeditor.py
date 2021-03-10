@@ -51,7 +51,7 @@ class PrologFile():
 
 class PrologDatabase():
 	symp_lists = SymBase()
-	dis_classes = DisBase()
+	dis_classes = DisBase()  # these should be derived classes from PrologFile
 	doc_register = DocBase()
 
 	def write_db(self):
