@@ -16,7 +16,7 @@ import tkinter as tk
 
 from . import libeditor as db
 
-class Kantoku():
+class App():
 	main_window = tk.Tk()
 	
 	
@@ -24,5 +24,5 @@ class Kantoku():
 		self.main_window.mainloop()
 
 def test():
-	a = Kantoku()
+	a = App()
 	a.mainloop()
