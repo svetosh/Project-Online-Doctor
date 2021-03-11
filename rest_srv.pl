@@ -1,5 +1,5 @@
-:- use_module(kbase_symplists).
-:- use_module(kbase_sympcat).
+:- use_module(kbase_symptlists).
+:- use_module(kbase_symptcat).
 :- use_module(kbase_handler).
 
 :- use_module(library(http/http_server)).
