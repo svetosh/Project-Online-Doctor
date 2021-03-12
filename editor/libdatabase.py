@@ -12,14 +12,14 @@
 ################################################################################
 
 #from . import libspinter as spinter # SWI-Prolog interface
-class ache():
+class ache(): # Deprecated
 	category = ''
 	sympt_num = 0
 	def __init__(self, cat, num):
 		self.category = cat
 		sympt_num = num
 
-class Dclass():
+class Dclass(): # Deprecated
 	name = ''
 	aches = []
 	def __init__(self, name = '', vec[]):
@@ -34,7 +34,7 @@ class Dclass():
 	def remove_ache(self, pos):
 		self.aches.pop(pos)
 	
-class Doctor():
+class Doctor(): # Deprecated
 	name = ''
 	dclasses = [] # daclasses id from all_dclasses
 	def __init__(self, name = '', vec = []):
@@ -50,23 +50,5 @@ class Doctor():
 		self.dclasses.pop(pos)
 
 class DataBase():
-	sympt_lists = dict() # {'category':['list', ..., 'list'], ...}
-	all_dclasses = []
-	all_doctors = []
-	def add_category_to_db(self, name):
-		if cat not in self.sympt_lists:
-			self.sympt_lists[cat] = []
-	def add_sympt_to_db(self, cat, name):
-		if cat in self.sympt_lists:
-			self.sympt_lists[cat].append(name)
-		else:
-			print('Error')
-			
-	def add_dclass_to_db(self, name):
-		newDclass = Dclass(name)
-		if newDclass not in self.all_dclasses:
-			self.all_dclasses.append(newDclass)
-	def add_doctor_to_db(self, name):
-		newDoctor = Doctor(name)
-		if newDoctor not in self.all_doctors:
-			self.all_doctors.append()
+	# will use sqlite3 database in RAM
+	TODO = True

@@ -2,15 +2,13 @@
 
 % База знаний "класс заболевания - симптомы"
 
-class_allergy(Symptoms):-
+dclass("аллергия",Symptoms):-
     ache("голова", 0, Symptoms),
     \+ ache("ноги", 0, Symptoms),
     \+ ache("ноги", 1, Symptoms).
-
-class_cardiology(Symptoms):-
-    ache("ССС", 0, Symptoms),
+dclass("к",Symptoms):-
+    ache("ССС", 0, Symptoms);
     ache("ноги", 2, Symptoms).
-
 /**
 
 заболевание_для_кардиолога(Симптомы):-

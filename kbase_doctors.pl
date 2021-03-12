@@ -6,10 +6,10 @@
 
 
 doctor(Symptoms, "аллерголог"):-
-	class_allergy(Symptoms).
+	dclass("аллергия",Symptoms).
 
 doctor(Symptoms, "кардиолог"):-
-    class_cardiology(Symptoms).
+    dclass("к",Symptoms).
 
 /**
 doctor(Symptoms, "терапевт"):-
