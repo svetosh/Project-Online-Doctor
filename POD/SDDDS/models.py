@@ -19,7 +19,10 @@ class Disease(models.Model):
     #prohibiting_symtoms = models.ManyToManyField(Symptom, verbose_name="Исключающий симптом")
     # warning_symptoms?
     def __str__(self):
-        return self.disease_name
+        s = ': '
+        for i in list(self.symptoms.all()):
+            s+= i.symptom_text + '; '
+        return self.disease_name + s[:-2]
 
 class Doctor(models.Model):
     doctor_name = models.CharField(max_length=100, unique=True, verbose_name="Специалист")
@@ -27,5 +30,8 @@ class Doctor(models.Model):
     diseases = models.ManyToManyField(Disease, verbose_name="Лечит")
     #prohibiting_diseases = models.ManyToManyField(Disease, verbose_name="Не лечит")
     def __str__(self):
-        return self.doctor_name + str(self.diseases)
+        s = ': '
+        for i in list(self.diseases.all()):
+            s+= i.disease_name + '; '
+        return self.doctor_name + s[:-2]
 
