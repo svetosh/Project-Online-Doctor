@@ -14,8 +14,8 @@ class Symptom(models.Model):
 
 class Disease(models.Model):
     disease_name = models.CharField(max_length=200, unique=True, verbose_name="Название класса")
-    allowing_symptoms = models.ManyToManyField(Symptom, verbose_name="Возможный симптом", related_name='a_s')
-    prohibiting_symptoms = models.ManyToManyField(Symptom, verbose_name="Исключающий симптом", related_name='p_s')
+    allowing_symptoms = models.ManyToManyField(Symptom, blank=True, verbose_name="Возможный симптом", related_name='a_s')
+    prohibiting_symptoms = models.ManyToManyField(Symptom, blank=True, verbose_name="Исключающий симптом", related_name='p_s')
     # warning_symptoms?
     def __str__(self):
         sa = ' '
@@ -32,8 +32,8 @@ class Disease(models.Model):
 
 class Doctor(models.Model):
     doctor_name = models.CharField(max_length=100, unique=True, verbose_name="Специалист")
-    allowing_diseases = models.ManyToManyField(Disease, verbose_name="Лечит", related_name='a_d')
-    prohibiting_diseases = models.ManyToManyField(Disease, verbose_name="Не лечит", related_name='p_d')
+    allowing_diseases = models.ManyToManyField(Disease, blank=True, verbose_name="Лечит", related_name='a_d')
+    prohibiting_diseases = models.ManyToManyField(Disease, blank=True, verbose_name="Не лечит", related_name='p_d')
     
     def __str__(self):
         sa = ' '
