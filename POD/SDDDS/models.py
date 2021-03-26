@@ -20,12 +20,10 @@ class Disease(models.Model):
     def __str__(self):
         sa = ' '
         temp_list = list(self.allowing_symptoms.all())
-        print (temp_list)
         for i in temp_list:
             sa+= i.symptom_text + '; '
         sp = ' '
         temp_list = list(self.prohibiting_symptoms.all())
-        print (temp_list)
         for i in temp_list:
             sp+= i.symptom_text + '; '
         return self.disease_name + '  [' + sa[:-2] + '][' + sp[:-2] + ']'
