@@ -14,24 +14,35 @@ class Symptom(models.Model):
 
 class Disease(models.Model):
     disease_name = models.CharField(max_length=200, unique=True, verbose_name="Название класса")
-    #allowing_
-    symptoms = models.ManyToManyField(Symptom, verbose_name="Возможный симптом")
-    #prohibiting_symtoms = models.ManyToManyField(Symptom, verbose_name="Исключающий симптом")
+    allowing_symptoms = models.ManyToManyField(Symptom, verbose_name="Возможный симптом", related_name='a_s')
+    prohibiting_symptoms = models.ManyToManyField(Symptom, verbose_name="Исключающий симптом", related_name='p_s')
     # warning_symptoms?
     def __str__(self):
-        s = ': '
-        for i in list(self.symptoms.all()):
-            s+= i.symptom_text + '; '
-        return self.disease_name + s[:-2]
+        sa = ' '
+        temp_list = list(self.allowing_symptoms.all())
+        print (temp_list)
+        for i in temp_list:
+            sa+= i.symptom_text + '; '
+        sp = ' '
+        temp_list = list(self.prohibiting_symptoms.all())
+        print (temp_list)
+        for i in temp_list:
+            sp+= i.symptom_text + '; '
+        return self.disease_name + '  [' + sa[:-2] + '][' + sp[:-2] + ']'
 
 class Doctor(models.Model):
     doctor_name = models.CharField(max_length=100, unique=True, verbose_name="Специалист")
-    #allowing_
-    diseases = models.ManyToManyField(Disease, verbose_name="Лечит")
-    #prohibiting_diseases = models.ManyToManyField(Disease, verbose_name="Не лечит")
+    allowing_diseases = models.ManyToManyField(Disease, verbose_name="Лечит", related_name='a_d')
+    prohibiting_diseases = models.ManyToManyField(Disease, verbose_name="Не лечит", related_name='p_d')
+    
     def __str__(self):
-        s = ': '
-        for i in list(self.diseases.all()):
-            s+= i.disease_name + '; '
-        return self.doctor_name + s[:-2]
+        sa = ' '
+        temp_list = list(self.allowing_diseases.all())
+        for i in temp_list:
+            sa+= i.disease_name + '; '
+        sp = ' '
+        temp_list = list(self.prohibiting_diseases.all())
+        for i in temp_list:
+            sp+= i.disease_name + '; '
+        return self.doctor_name + '  [' + sa[:-2] + '][' + sp[:-2] + ']'
 
