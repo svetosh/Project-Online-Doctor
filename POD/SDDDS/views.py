@@ -12,7 +12,7 @@ def to_pk_set(qs):
         pk_set.add(i.pk)
     return pk_set
 
-def sddprocessor(slist):
+def sddprocessor(slist): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
     result = []
     present_symptoms = []
     allowing_dis_set = set()
@@ -23,20 +23,20 @@ def sddprocessor(slist):
         present_symptoms.append(models.Symptom.objects.filter(symptom_text=i)[0].pk)
     for i in present_symptoms: # code style should be improved
         allowing_dis_set |= to_pk_set(models.Disease.objects.filter(
-                allowing_symptoms=i)
+                allowing_symptoms=i) # getting primary keys
         )
         prohibiting_dis_set |= to_pk_set(models.Disease.objects.filter(
                 prohibiting_symptoms=i)
         )
-    disease_set = allowing_dis_set - prohibiting_dis_set
+    disease_set = allowing_dis_set - prohibiting_dis_set # substracting
     for i in disease_set:
         allowing_doc_set |= to_pk_set(models.Doctor.objects.filter(
-                allowing_diseases=i)
+                allowing_diseases=i) # getting PK again
         )
         prohibiting_doc_set |= to_pk_set(models.Doctor.objects.filter(
                 prohibiting_diseases=i)
         )
-    doctor_set = allowing_doc_set - prohibiting_doc_set
+    doctor_set = allowing_doc_set - prohibiting_doc_set # substructing again
     for i in doctor_set:
         result.append(models.Doctor.objects.get(pk=i).doctor_name)
     return result
@@ -52,13 +52,14 @@ def index(request):
             symp_names.append(j.symptom_text)
         jresponse[i.category_name] = symp_names[:]
         symp_names.clear()
-    return JsonResponse(jresponse)
+    return JsonResponse(jresponse) # returns somethin like this:
+    # {category:[symptoms], category:[symptoms],...}
 
 #@ensure_csrf_cookie
 @csrf_exempt # for testing purposes
 def odapi(request):
-    if request.method == 'POST':
-        json_in = json.loads(request.readline())
-        json_out = sddprocessor(json_in['slist']) #dict()
-        return JsonResponse({'dlist':json_out})
-    return HttpResponseBadRequest('No JSON data.')
+    if request.method == 'POST': # check if the request is POST
+        json_in = json.loads(request.readline()) # get the JSON
+        json_out = sddprocessor(json_in['slist']) # process it
+        return JsonResponse({'dlist':json_out}) # response with JSON
+    return HttpResponseBadRequest('No JSON data.') # or say the user to be moron

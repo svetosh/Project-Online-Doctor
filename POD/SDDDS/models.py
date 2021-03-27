@@ -1,5 +1,11 @@
 from django.db import models
 
+# Everything presented here should be improved,
+# i.e. the implementation in prolog had an ability to make such constructions 
+# like "(SYMPTOM_0 and SYMPTOM_1) or (SYMPTOM_2 and SYMPTOM_3 and not SYMPTOM4)"
+# but now we are limited to two sets of symptoms. The same is applicable to the
+# Disease model and its relation with Doctor class.
+
 class Category(models.Model):
     category_name = models.CharField(max_length=100, verbose_name="Категория симптомов")
     def __str__(self):
