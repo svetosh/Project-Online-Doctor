@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 
 from . import models
 
@@ -14,3 +14,10 @@ def index(request):
         jresponse[i.category_name] = symp_names[:]
         symp_names.clear()
     return JsonResponse(jresponse)
+    
+def odapi(request):
+	if request.method == 'POST':
+		json_in = request.POST
+		json_out = dict()
+		return JsonResponse(json_out)
+	return HttpResponseBadRequest('No JSON data.')
