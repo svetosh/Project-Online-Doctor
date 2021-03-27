@@ -16,8 +16,8 @@ def index(request):
     return JsonResponse(jresponse)
     
 def odapi(request):
-	if request.method == 'POST':
-		json_in = request.POST
-		json_out = dict()
-		return JsonResponse(json_out)
-	return HttpResponseBadRequest('No JSON data.')
+    if request.method == 'POST':
+        json_in = request.POST
+        json_out = json_in #dict()
+        return JsonResponse(json_out)
+    return HttpResponseBadRequest('No JSON data.')
