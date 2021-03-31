@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, QueryDict
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseRedirect 
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 
 import json
@@ -14,7 +14,7 @@ def to_pk_set(qs):
 
 def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
     
-    result = []
+    dlist = []
     present_symptoms = []
     allowing_dis_set = set()
     prohibiting_dis_set = set()
@@ -39,24 +39,30 @@ def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
                 prohibiting_diseases=i)
         )
     doctor_set = allowing_doc_set - prohibiting_doc_set # substructing again
+    for i in doctor_set:
+        dlist.append(models.Doctor.objects.get(pk=i).doctor_name)
     if mode == 'external':
-        for i in doctor_set:
-            result.append(models.Doctor.objects.get(pk=i).doctor_name)
+        result = {'dlist' : dlist}
     elif mode == 'internal':
-        result = list(doctor_set)
+        result = {'dlist' : dlist, 'pk_list' : list(doctor_set)}
     return result
 
-
-def index(request):
-    jresponse = dict()
+def get_symptoms():
+    response = dict()
     cat_list = list(models.Category.objects.all())
     symp_names = []
     for i in cat_list:
         symp_list = list(i.symptom_set.all())
         for j in symp_list:
             symp_names.append(j.symptom_text)
-        jresponse[i.category_name] = symp_names[:]
+        response[i.category_name] = symp_names[:]
         symp_names.clear()
+    return response
+
+
+
+def index_json(request):
+    jresponse = get_symptoms()
     return JsonResponse(jresponse)
     # returns something like this:
     # {category:[symptoms], category:[symptoms],...}
@@ -67,8 +73,14 @@ def odapi(request):
     if request.method == 'POST': # check if the request is POST
         json_in = json.loads(request.readline()) # get the JSON
         json_out = sddprocessor(json_in['slist'], 'external') # process it
-        return JsonResponse({'dlist':json_out}) # response with JSON
+        return JsonResponse(json_out) # response with JSON
     return HttpResponseBadRequest('No JSON data.') # or say the user to be moron
+
+
+
+def index(request):
+    symptoms = get_symptoms()
+    return render(request, 'SDDDS/results.html', {'doctors':symptoms})
 
 def process_symptoms(request):
     if request.method == 'POST': # check if the request is POST
@@ -76,10 +88,9 @@ def process_symptoms(request):
         
         # TODO: add to db
         
-        return HttpResponseRedirect(reverse('sddds:results', args=(json_out)))
+        return HttpResponseRedirect(reverse('sddds:results', args=(json_out['dlist'])))
     return HttpResponseBadRequest('Not a POST request.') 
-    # or say that the user is a moron
+    # say the user is too curious
 
 def results(request, doctors):
-    
-    return render(request, 'sddds/results.html', {'doctors':doctors})
+    return render(request, 'SDDDS/results.html', {'doctors':doctors})
