@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseRedirect 
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.urls import reverse
 
 import json
 
@@ -79,16 +80,16 @@ def odapi(request):
 
 
 def index(request):
-    symptoms = get_symptoms()
-    return render(request, 'SDDDS/results.html', {'symptoms':symptoms})
+    symptoms = models.Category.objects.all()
+    return render(request, 'SDDDS/index.html', {'symptoms':symptoms})
 
 def process_symptoms(request):
     if request.method == 'POST': # check if the request is POST
-        json_out = sddprocessor(request.POST['slist'], 'internal')
-        
+        json_out = {'test':'api'}#sddprocessor(request.POST['slist'], 'internal')
+        print(request.POST.dict())
         # TODO: add to db
         
-        return HttpResponseRedirect(reverse('sddds:results', args=(json_out['dlist'])))
+        return HttpResponseRedirect(reverse('sddds:results', args=(json_out)))
     return HttpResponseBadRequest('Not a POST request.') 
     # say the user is too curious
 

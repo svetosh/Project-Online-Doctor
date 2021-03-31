@@ -1,12 +1,12 @@
 <h1>Epic cool form</h1>
-
+{{ categories }}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'sddds:process_symptoms' %}" method="post">
 {% csrf_token %}
-{% for i in  %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% for i in categories %}
+        <input type="radio" name="symptom" id="symptom{{ forloop.counter }}" value="{{ i.symptoms_set.all }}">
+        <label for="symptom{{ forloop.counter }}">{{ i.symptoms_set.all }}</label><br>
 {% endfor %}
-<input type="submit" value="Vote">
+<input type="submit" value="Отправить">
 </form>

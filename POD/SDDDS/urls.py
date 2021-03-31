@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+app_name = 'sddds'
 urlpatterns = [
     path('index_json', views.index, name='index_json'),
     path('odapi', views.odapi, name='odapi'),
