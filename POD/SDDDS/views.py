@@ -12,13 +12,15 @@ def to_pk_set(qs):
         pk_set.add(i.pk)
     return pk_set
 
-def sddprocessor(slist): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
+def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
+    
     result = []
     present_symptoms = []
     allowing_dis_set = set()
     prohibiting_dis_set = set()
     allowing_doc_set = set()
     prohibiting_doc_set = set()
+    
     for i in slist:
         present_symptoms.append(models.Symptom.objects.filter(symptom_text=i)[0].pk)
     for i in present_symptoms: # code style should be improved
@@ -37,8 +39,11 @@ def sddprocessor(slist): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
                 prohibiting_diseases=i)
         )
     doctor_set = allowing_doc_set - prohibiting_doc_set # substructing again
-    for i in doctor_set:
-        result.append(models.Doctor.objects.get(pk=i).doctor_name)
+    if mode == 'external':
+        for i in doctor_set:
+            result.append(models.Doctor.objects.get(pk=i).doctor_name)
+    elif mode == 'internal':
+        result = list(doctor_set)
     return result
 
 
@@ -52,7 +57,8 @@ def index(request):
             symp_names.append(j.symptom_text)
         jresponse[i.category_name] = symp_names[:]
         symp_names.clear()
-    return JsonResponse(jresponse) # returns somethin like this:
+    return JsonResponse(jresponse)
+    # returns something like this:
     # {category:[symptoms], category:[symptoms],...}
 
 #@ensure_csrf_cookie
@@ -60,6 +66,20 @@ def index(request):
 def odapi(request):
     if request.method == 'POST': # check if the request is POST
         json_in = json.loads(request.readline()) # get the JSON
-        json_out = sddprocessor(json_in['slist']) # process it
+        json_out = sddprocessor(json_in['slist'], 'external') # process it
         return JsonResponse({'dlist':json_out}) # response with JSON
     return HttpResponseBadRequest('No JSON data.') # or say the user to be moron
+
+def process_symptoms(request):
+    if request.method == 'POST': # check if the request is POST
+        json_out = sddprocessor(request.POST['slist'], 'internal')
+        
+        # TODO: add to db
+        
+        return HttpResponseRedirect(reverse('sddds:results', args=(json_out)))
+    return HttpResponseBadRequest('Not a POST request.') 
+    # or say that the user is a moron
+
+def results(request, doctors):
+    
+    return render(request, 'sddds/results.html', {'doctors':doctors})
