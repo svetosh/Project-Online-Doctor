@@ -80,7 +80,7 @@ def odapi(request):
 
 def index(request):
     symptoms = get_symptoms()
-    return render(request, 'SDDDS/results.html', {'doctors':symptoms})
+    return render(request, 'SDDDS/results.html', {'symptoms':symptoms})
 
 def process_symptoms(request):
     if request.method == 'POST': # check if the request is POST
