@@ -50,6 +50,24 @@ def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
         result = {'dlist' : dlist, 'pk_list' : list(doctor_set)}
     return result
 
+def index(request):
+    categories = models.Category.objects.all()
+    return render(request, 'SDDDS/index.html', {'categories':categories})
+
+def process_symptoms(request):
+    if request.method == 'POST': # check if the request is POST
+        print(request.POST.dict())
+        print(request.FILES.dict())
+        if 'slist' in request.POST:
+            json_out = json.dumps(sddprocessor(request.POST['slist'], 'internal'))
+            # TODO: add to db
+            return HttpResponseRedirect(reverse('sddds:results', args=(json_out,)))
+    return HttpResponseBadRequest('Not a POST request.') 
+    # say the user is too curious
+
+def results(request, doctors):
+    doctors = json.loads(doctors)
+    return render(request, 'SDDDS/results.html', {'doctors':doctors})
 
 
 # Deprecated API
@@ -80,24 +98,3 @@ def odapi(request):
         json_out = sddprocessor(json_in['slist'], 'external') # process it
         return JsonResponse(json_out) # response with JSON
     return HttpResponseBadRequest('No JSON data.') # or say the user to be moron
-###
-
-
-def index(request):
-    categories = models.Category.objects.all()
-    return render(request, 'SDDDS/index.html', {'categories':categories})
-
-def process_symptoms(request):
-    if request.method == 'POST': # check if the request is POST
-        print(request.POST.dict())
-        print(request.FILES.dict())
-        if 'slist' in request.POST:
-            json_out = json.dumps(sddprocessor(request.POST['slist'], 'internal'))
-            # TODO: add to db
-            return HttpResponseRedirect(reverse('sddds:results', args=(json_out,)))
-    return HttpResponseBadRequest('Not a POST request.') 
-    # say the user is too curious
-
-def results(request, doctors):
-    doctors = json.loads(doctors)
-    return render(request, 'SDDDS/results.html', {'doctors':doctors})
