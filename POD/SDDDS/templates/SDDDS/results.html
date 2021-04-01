@@ -1,2 +1,6 @@
-{{ doctors }}
-
+<h1>{{ doctors }}</h1>
+<ul>
+{% for doc in doctors.results %}
+    <li>{{ doc }}</li>
+{% endfor %}
+</ul>

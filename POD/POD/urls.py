@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('sdd-data-service/',include('SDDDS.urls')),
+    path('sddds/', include('SDDDS.urls')),
     path('admin/', admin.site.urls),
 ]

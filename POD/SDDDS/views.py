@@ -23,7 +23,9 @@ def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
     prohibiting_doc_set = set()
     
     for i in slist:
-        present_symptoms.append(models.Symptom.objects.filter(symptom_text=i)[0].pk)
+        recieved = models.Symptom.objects.filter(symptom_text=i)
+        if len(recieved) > 0:
+            present_symptoms.append([0].pk)
     for i in present_symptoms: # code style should be improved
         allowing_dis_set |= to_pk_set(models.Disease.objects.filter(
                 allowing_symptoms=i) # getting primary keys
@@ -80,18 +82,20 @@ def odapi(request):
 
 
 def index(request):
-    symptoms = models.Category.objects.all()
-    return render(request, 'SDDDS/index.html', {'symptoms':symptoms})
+    categories = models.Category.objects.all()
+    return render(request, 'SDDDS/index.html', {'categories':categories})
 
 def process_symptoms(request):
     if request.method == 'POST': # check if the request is POST
-        json_out = {'test':'api'}#sddprocessor(request.POST['slist'], 'internal')
         print(request.POST.dict())
-        # TODO: add to db
-        
-        return HttpResponseRedirect(reverse('sddds:results', args=(json_out)))
+        print(request.FILES.dict())
+        if 'slist' in request.POST:
+            json_out = json.dumps(sddprocessor(request.POST['slist'], 'internal'))
+            # TODO: add to db
+            return HttpResponseRedirect(reverse('sddds:results', args=(json_out,)))
     return HttpResponseBadRequest('Not a POST request.') 
     # say the user is too curious
 
 def results(request, doctors):
+    doctors = json.loads(doctors)
     return render(request, 'SDDDS/results.html', {'doctors':doctors})
