@@ -50,6 +50,10 @@ def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
         result = {'dlist' : dlist, 'pk_list' : list(doctor_set)}
     return result
 
+
+
+# Deprecated API
+# we'll fallback to it if i screw up in templates
 def get_symptoms():
     response = dict()
     cat_list = list(models.Category.objects.all())
@@ -61,8 +65,6 @@ def get_symptoms():
         response[i.category_name] = symp_names[:]
         symp_names.clear()
     return response
-
-
 
 def index_json(request):
     jresponse = get_symptoms()
@@ -78,7 +80,7 @@ def odapi(request):
         json_out = sddprocessor(json_in['slist'], 'external') # process it
         return JsonResponse(json_out) # response with JSON
     return HttpResponseBadRequest('No JSON data.') # or say the user to be moron
-
+###
 
 
 def index(request):
