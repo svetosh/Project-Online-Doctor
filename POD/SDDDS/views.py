@@ -50,6 +50,8 @@ def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
         result = {'dlist' : dlist, 'pk_list' : list(doctor_set)}
     return result
 
+
+
 def index(request):
     categories = models.Category.objects.all()
     return render(request, 'SDDDS/index.html', {'categories':categories})
