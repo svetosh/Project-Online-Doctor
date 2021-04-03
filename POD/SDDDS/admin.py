@@ -17,6 +17,8 @@ class DiseaseAdmin(admin.ModelAdmin):
     ('Симптомы',         {'fields': ['allowing_symptoms','prohibiting_symptoms']})
     ]
     search_fields = ['disease_name']
+    list_display = ['disease_name']
+    
     
 class DoctorAdmin(admin.ModelAdmin):
     fieldsets = [

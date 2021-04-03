@@ -38,10 +38,11 @@ def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
         allowing_doc_set |= to_pk_set(models.Doctor.objects.filter(
                 allowing_diseases=i) # getting PK again
         )
-        prohibiting_doc_set |= to_pk_set(models.Doctor.objects.filter(
-                prohibiting_diseases=i)
-        )
-    doctor_set = allowing_doc_set - prohibiting_doc_set # substructing again
+     
+        # ~ prohibiting_doc_set |= to_pk_set(models.Doctor.objects.filter(
+                # ~ prohibiting_diseases=i)
+        # ~ )
+    doctor_set = allowing_doc_set #- prohibiting_doc_set # substructing again
     for i in doctor_set:
         dlist.append(models.Doctor.objects.get(pk=i).doctor_name)
     if mode == 'external':

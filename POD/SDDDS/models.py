@@ -26,7 +26,7 @@ class Symptom(models.Model):
         return self.symptom_text
 
 class Disease(models.Model):
-    disease_name = models.CharField(max_length=200, unique=True, verbose_name="Название класса")
+    disease_name = models.CharField(max_length=200, unique=True, verbose_name="Название класса заболеваний")
     allowing_symptoms = models.ManyToManyField(Symptom, blank=True, verbose_name="Возможные симптомы", related_name='a_s')
     prohibiting_symptoms = models.ManyToManyField(Symptom, blank=True, verbose_name="Исключающие симптомы", related_name='p_s')
     
@@ -44,16 +44,16 @@ class Disease(models.Model):
 class Doctor(models.Model):
     doctor_name = models.CharField(max_length=100, unique=True, verbose_name="Специалист")
     allowing_diseases = models.ManyToManyField(Disease, blank=True, verbose_name="Лечит", related_name='a_d')
-    prohibiting_diseases = models.ManyToManyField(Disease, blank=True, verbose_name="Не лечит", related_name='p_d')
+    # ~ prohibiting_diseases = models.ManyToManyField(Disease, blank=True, verbose_name="Не лечит", related_name='p_d')
     
     def __str__(self):
         sa = ' '
         temp_list = list(self.allowing_diseases.all())
         for i in temp_list:
             sa+= i.disease_name + SEPARATOR
-        sp = ' '
-        temp_list = list(self.prohibiting_diseases.all())
-        for i in temp_list:
-            sp+= i.disease_name + SEPARATOR
-        return self.doctor_name + B + sa[:-2] + M + sp[:-2] + E
+        # ~ sp = ' '
+        # ~ temp_list = list(self.prohibiting_diseases.all())
+        # ~ for i in temp_list:
+            # ~ sp+= i.disease_name + SEPARATOR
+        return self.doctor_name + B + sa[:-2] + E #M + sp[:-2] + 
 
