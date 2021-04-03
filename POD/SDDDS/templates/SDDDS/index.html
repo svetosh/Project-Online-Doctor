@@ -17,15 +17,21 @@
 		<form action="{% url 'sddds:process_symptoms' %}" method="post">
 
 			{% csrf_token %}
-			{% for i in categories %}
-				<h2 class="doctors">{{ i.category_name }}:</h2>
-				{% for j in i.symptom_set.all %}
-					<div class="circle">
-							<input type="checkbox" name="slist" id="{{ i.category_name }}symptom{{ forloop.counter }}" value="{{ j }}">
-							<label for="{{ i.category_name }}symptom{{ forloop.counter }}">{{ j }}</label><br>
-					</div>
+			<div class="scategories-block">
+				{% for i in categories %}
+					<details class="scategory">
+						<summary class="h4">{{ i.category_name }}:</summary>
+						<ul>
+							{% for j in i.symptom_set.all %}
+								<li>
+										<input type="checkbox" name="slist" id="{{ i.category_name }}symptom{{ forloop.counter }}" value="{{ j }}">
+										<label for="{{ i.category_name }}symptom{{ forloop.counter }}">{{ j }}</label>
+								</li>
+							{% endfor %}
+						</ul>
+					</details>
 				{% endfor %}
-			{% endfor %}
+			</div>
 			<input type="submit" class="otprbtn" value="Отправить">
 
 		</form>

@@ -6,6 +6,38 @@
     background-position: center;
     box-shadow:  0 1px 3px 1px #696969;
 }
+.scategory {
+    width: 100%;
+    min-height: 10px;
+    background-size: cover;
+	border-radius: 20px;
+    background-position: center;
+    border-color: #EDEEF0;
+	border-bottom-width: 2px;
+	border-bottom-style: inset;
+	}
+	
+.scategories-block {
+    width: 100%;
+    min-height: 10px;
+    border-color: #EDEEF0;
+	border-width: 2px;
+	border-style: inset;
+	color: #2A003E;
+	font-size: 14px;
+	background: #EACAE0;
+	cursor: pointer;
+	border-radius: 20px;
+	-ms-user-select: none;
+		  -moz-user-select: none;
+		  -khtml-user-select: none;
+		  -webkit-user-select: none;
+	box-sizing: border-box;
+	padding: 5px 0px;
+	font-family: Raleway;
+	text-align: center;
+	}
+	
 .logo {
     position: relative;
     margin-left: 2px;
