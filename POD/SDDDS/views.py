@@ -62,15 +62,16 @@ def process_symptoms(request):
         print(request.POST.dict())
         print(request.POST.getlist('slist'))
         if 'slist' in request.POST:
-            json_out = json.dumps(sddprocessor(request.POST.getlist('slist'), 'internal'))
+            result = sddprocessor(request.POST.getlist('slist'), 'internal')
             # TODO: add to db
+            json_out = json.dumps(result['dlist'])[2:-2]
             return HttpResponseRedirect(reverse('sddds:results', args=(json_out,)))
     return HttpResponseBadRequest('Not a POST request.') 
     # say the user is too curious
 
 def results(request, doctors):
-    doctors = json.loads(doctors)
-    return render(request, 'SDDDS/results.html', {'doctors':doctors['dlist']})
+    doctors = json.loads('["'+doctors+'"]')
+    return render(request, 'SDDDS/results.html', {'doctors':doctors})
 
 
 # Deprecated API

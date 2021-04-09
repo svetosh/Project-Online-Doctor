@@ -11,5 +11,5 @@ urlpatterns = [
     
     path('', views.index, name='index'),
     path('process_symptoms/', views.process_symptoms, name='process_symptoms'),
-    path('results$<str:doctors>', views.results, name='results'),
+    path('results/<str:doctors>', views.results, name='results'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
