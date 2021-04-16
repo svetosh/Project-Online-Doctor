@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 # Everything presented here should be improved,
 # i.e. the implementation in prolog had an ability to make such constructions 
 # like "(SYMPTOM_0 and SYMPTOM_1) or (SYMPTOM_2 and SYMPTOM_3 and not SYMPTOM4)"
@@ -57,3 +59,9 @@ class Doctor(models.Model):
             # ~ sp+= i.disease_name + SEPARATOR
         return self.doctor_name + B + sa[:-2] + E #M + sp[:-2] + 
 
+
+
+class HistoryEntry(models.Model):
+	user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name="Пользователь")
+	symptoms = models.CharField(max_length=1000, verbose_name="Введённые симптомы") 
+	result = models.CharField(max_length=1000, verbose_name="Рекомендованные специалисты")
