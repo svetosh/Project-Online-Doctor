@@ -1,6 +1,5 @@
 from django.db import models
-
-from django.contrib.auth.models import User
+from django.conf import settings
 
 # Everything presented here should be improved,
 # i.e. the implementation in prolog had an ability to make such constructions 
@@ -11,7 +10,7 @@ from django.contrib.auth.models import User
 # Constants
 B = '  ['  # begin
 M = ']  [' # middle
-E = ']'      # end
+E = ' ]'      # end
 SEPARATOR = '; '
 
 class Category(models.Model):
@@ -62,6 +61,6 @@ class Doctor(models.Model):
 
 
 class HistoryEntry(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь")
 	symptoms = models.CharField(max_length=1000, verbose_name="Введённые симптомы") 
 	result = models.CharField(max_length=1000, verbose_name="Рекомендованные специалисты")

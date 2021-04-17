@@ -55,7 +55,7 @@ def sddprocessor(slist, mode): # SET_OF_ITEMS = ALLOWING_SET - PROHIBITING_SET
 
 def index(request):
     categories = models.Category.objects.all().order_by('category_name')
-    return render(request, 'SDDDS/index.html', {'categories':categories})
+    return render(request, 'SDDDS/symptoms.html', {'categories':categories})
 
 def process_symptoms(request):
     if request.method == 'POST': # check if the request is POST

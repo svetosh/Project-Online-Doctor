@@ -23,7 +23,7 @@ class DiseaseAdmin(admin.ModelAdmin):
 class DoctorAdmin(admin.ModelAdmin):
     fieldsets = [
     (None,               {'fields': ['doctor_name']}),
-    ('Классы заболеваний',         {'fields': ['allowing_diseases','prohibiting_diseases']})
+    ('Классы заболеваний',         {'fields': ['allowing_diseases']})
     ]
     search_fields = ['doctor_name']
 
