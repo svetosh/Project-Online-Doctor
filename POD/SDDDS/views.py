@@ -1,3 +1,4 @@
+# Copyright 2021 Fe-Ti <btm.007@mail.ru>
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseRedirect 
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt

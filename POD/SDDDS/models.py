@@ -1,3 +1,4 @@
+# Copyright 2021 Fe-Ti <btm.007@mail.ru>
 from django.db import models
 from django.conf import settings
 
