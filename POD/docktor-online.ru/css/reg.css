@@ -1,0 +1,49 @@
+.header {
+    width: 100%;
+    background-image: url(../img/sha.jpg);
+    min-height: 125px;
+    background-size: cover;
+    background-position: center;
+    box-shadow:  0 1px 3px 1px #696969;
+  }
+  .logo {
+      position: relative;
+      margin-left: 2px;
+      margin-top: -50px;
+      margin-right: 2px;
+  }
+  .img-fluid {
+      min-width: 25px;
+      width: 250px;
+    }
+h5 {
+  margin: auto;
+  font-size: 25px;
+}
+
+form {
+  display: flex;
+  margin:0 auto;
+  max-width: 350px;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid gray;
+  padding: 10px 5px;
+
+}
+
+#bloki {
+padding-top: 15px;
+
+}
+.block{
+  padding: 10px;
+}
+.blocks {
+  display: flex;
+  max-width: 200px;
+  flex-direction: column;
+  border: 1px solid gray;
+  margin: 5px;
+  padding: 10px 5px;
+}
